@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const stuffRoutes = require('./routes/stuffs')
 const userRoutes = require('./routes/users');
@@ -21,6 +22,7 @@ useUnifiedTopology: true })
     .catch(() => console.log('Connexion à MongoDB échouée !'));
   
 app.use(bodyParser.json())
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/stuff', stuffRoutes)
 app.use('/api/auth', userRoutes);
